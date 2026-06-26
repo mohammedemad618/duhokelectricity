@@ -12,7 +12,7 @@ import { formatDate } from "@/lib/format";
 import { getDictionary } from "@/lib/i18n";
 import { Badge, Breadcrumbs, Container, SectionHeading } from "@/components/ui";
 import { ArticleCard } from "@/components/article-card";
-import { CategoryCover } from "@/components/category-cover";
+import { CategoryCover, defaultArticleImage } from "@/components/category-cover";
 
 export async function generateMetadata({
   params,
@@ -25,7 +25,11 @@ export async function generateMetadata({
   return {
     title: article.title,
     description: article.excerpt,
-    openGraph: { title: article.title, description: article.excerpt },
+    openGraph: {
+      title: article.title,
+      description: article.excerpt,
+      images: [{ url: defaultArticleImage(article.category, `${article.id}-${article.title}`) }],
+    },
   };
 }
 
@@ -98,6 +102,7 @@ export default async function ArticlePage({
           <CategoryCover
             category={article.category}
             imageCount={article.imageCount}
+            variantKey={`${article.id}-${article.title}`}
             className="mb-8 aspect-[16/9] w-full rounded-2xl"
           />
 
@@ -118,6 +123,7 @@ export default async function ArticlePage({
                     <CategoryCover
                       key={i}
                       category={article.category}
+                      variantKey={`${article.id}-${article.title}-${i}`}
                       className="aspect-square rounded-xl"
                     />
                   ),

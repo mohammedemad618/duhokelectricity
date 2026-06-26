@@ -1,50 +1,66 @@
-import {
-  Building2,
-  ClipboardList,
-  Images,
-  Newspaper,
-  Wrench,
-  type LucideIcon,
-} from "lucide-react";
+import Image from "next/image";
+import { Images } from "lucide-react";
 import type { ArticleCategory } from "@/lib/types";
 import { cn } from "@/lib/cn";
 
-const config: Record<
-  ArticleCategory,
-  { gradient: string; Icon: LucideIcon }
-> = {
-  news: { gradient: "from-brand-600 to-brand-800", Icon: Newspaper },
-  construction: { gradient: "from-accent-500 to-accent-700", Icon: Wrench },
-  projects: { gradient: "from-emerald-500 to-emerald-700", Icon: Building2 },
-  planning: { gradient: "from-violet-500 to-violet-700", Icon: ClipboardList },
+const coverImages: Record<ArticleCategory, string[]> = {
+  news: [
+    "/news-defaults/news.png",
+    "/news-defaults/news-2.png",
+    "/news-defaults/news-3.png",
+    "/news-defaults/news-4.png",
+  ],
+  construction: ["/news-defaults/construction.png"],
+  projects: ["/news-defaults/projects.png"],
+  planning: ["/news-defaults/planning.png"],
 };
 
-/**
- * غلاف رمزي للمحتوى (بديل مؤقت عن الصور الحقيقية).
- * يستخدم تدرّجاً لونياً وأيقونة حسب تصنيف المحتوى.
- */
+function pickImage(category: ArticleCategory, variantKey?: string): string {
+  const images = coverImages[category];
+  if (!variantKey || images.length === 1) return images[0];
+
+  let hash = 0;
+  for (const char of variantKey) {
+    hash = (hash * 31 + char.charCodeAt(0)) >>> 0;
+  }
+  return images[hash % images.length];
+}
+
+export function defaultArticleImage(
+  category: ArticleCategory,
+  variantKey?: string,
+): string {
+  return pickImage(category, variantKey);
+}
+
 export function CategoryCover({
   category,
   className,
   imageCount,
+  variantKey,
 }: {
   category: ArticleCategory;
   className?: string;
   imageCount?: number;
+  variantKey?: string;
 }) {
-  const { gradient, Icon } = config[category];
+  const src = pickImage(category, variantKey);
   return (
     <div
       className={cn(
-        "relative flex items-center justify-center overflow-hidden bg-gradient-to-br text-white",
-        gradient,
+        "relative overflow-hidden bg-slate-100 text-white",
         className,
       )}
       aria-hidden
     >
-      {/* زخرفة خلفية */}
-      <Icon className="absolute -left-6 -top-6 size-40 opacity-10" strokeWidth={1.5} />
-      <Icon className="size-12 opacity-90" strokeWidth={1.75} />
+      <Image
+        src={src}
+        alt=""
+        fill
+        sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+        className="object-cover transition duration-500 group-hover:scale-105"
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-brand-950/25 via-transparent to-transparent" />
       {imageCount && imageCount > 0 && (
         <span className="absolute bottom-2 left-2 inline-flex items-center gap-1 rounded-full bg-black/30 px-2 py-0.5 text-xs font-medium backdrop-blur">
           <Images className="size-3.5" />

@@ -34,6 +34,7 @@ export async function ArticleCard({
         <CategoryCover
           category={article.category}
           imageCount={article.imageCount}
+          variantKey={`${article.id}-${article.title}`}
           className="aspect-[16/9] w-full"
         />
       </Link>
@@ -80,6 +81,7 @@ export function ArticleListItem({ article }: { article: Article }) {
     >
       <CategoryCover
         category={article.category}
+        variantKey={`${article.id}-${article.title}`}
         className="size-16 shrink-0 rounded-lg"
       />
       <div className="min-w-0">
