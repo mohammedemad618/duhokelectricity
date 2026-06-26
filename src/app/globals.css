@@ -1,0 +1,146 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   نظام التصميم — دائرة توزيع كهرباء دهوك
+   هوية رسمية هادئة: أزرق رسمي + لمسة كهرماني (طاقة)
+   ========================================================================== */
+
+@theme {
+  /* اللون الأساسي (أزرق رسمي) */
+  --color-brand-50: #eef6fc;
+  --color-brand-100: #d8eaf6;
+  --color-brand-200: #b3d4ec;
+  --color-brand-300: #82b6dd;
+  --color-brand-400: #4f93ca;
+  --color-brand-500: #2b75b3;
+  --color-brand-600: #1d5d97;
+  --color-brand-700: #184b7a;
+  --color-brand-800: #163f64;
+  --color-brand-900: #143553;
+  --color-brand-950: #0d2238;
+
+  /* اللون المكمّل (كهرماني — طاقة) */
+  --color-accent-50: #fff8eb;
+  --color-accent-100: #ffedc6;
+  --color-accent-200: #ffd888;
+  --color-accent-300: #ffbe4a;
+  --color-accent-400: #fba81e;
+  --color-accent-500: #f59e0b;
+  --color-accent-600: #d97706;
+  --color-accent-700: #b45309;
+
+  /* خط عربي */
+  --font-sans: var(--font-cairo), "Segoe UI", Tahoma, sans-serif;
+
+  /* زوايا */
+  --radius-xl2: 1.25rem;
+}
+
+:root {
+  --background: #f6f8fb;
+  --foreground: #16202b;
+  --surface: #ffffff;
+  --border: #e3e9f0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* خط رسمي بتغطية كاملة للحروف الكردية (يُطبَّق عند اللغة الكردية فقط) */
+html[lang="kmr"] body {
+  font-family: var(--font-kurdish), "Segoe UI", Tahoma, sans-serif;
+  letter-spacing: 0;
+}
+
+/* أرقام لاتينية واضحة للأرقام داخل النصوص العربية عند الحاجة */
+.nums-latn {
+  font-feature-settings: "lnum" 1;
+}
+
+/* شريط تمرير لطيف */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: #c4cedb;
+  border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #a9b6c7;
+}
+
+/* حركة شريط الإعلانات المتحرك (تيكر) — تتطلب نسختين من المحتوى */
+@keyframes ticker {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.animate-ticker {
+  animation: ticker 40s linear infinite;
+  will-change: transform;
+}
+.ticker-pause:hover .animate-ticker {
+  animation-play-state: paused;
+}
+@media (prefers-reduced-motion: reduce) {
+  .animate-ticker {
+    animation: none;
+  }
+}
+
+/* قصّ النص لعدد أسطر محدد */
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* تنسيق محتوى المقالات (Prose مبسّط) */
+.article-body {
+  line-height: 2;
+  font-size: 1.075rem;
+  color: #243240;
+}
+.article-body p {
+  margin-bottom: 1.1rem;
+}
+.article-body h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 1.8rem 0 0.8rem;
+  color: var(--color-brand-800);
+}
+.article-body h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin: 1.4rem 0 0.6rem;
+  color: var(--color-brand-700);
+}
+.article-body ul {
+  list-style: disc;
+  padding-inline-start: 1.5rem;
+  margin-bottom: 1.1rem;
+}
+.article-body li {
+  margin-bottom: 0.4rem;
+}
