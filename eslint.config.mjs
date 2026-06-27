@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // مخرجات Netlify المولّدة محلياً (ليست كوداً مصدرياً)
+    ".netlify/**",
   ]),
 ]);
 
