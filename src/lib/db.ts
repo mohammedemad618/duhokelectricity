@@ -1,18 +1,52 @@
-import { MongoClient, type Db, type Collection, type Document } from "mongodb";
+import {
+  MongoClient,
+  type Collection,
+  type Db,
+  type Document,
+  type MongoClientOptions,
+} from "mongodb";
 
-// اتصال MongoDB مع تخزين مؤقت عبر globalThis ليبقى عبر إعادة التحميل الساخن (HMR)
+// اتصال MongoDB مهيّأ للبيئة بدون خادم (serverless) على Netlify
 const uri = process.env.MONGODB_URI || "mongodb://127.0.0.1:27017";
 const dbName = process.env.MONGODB_DB || "dohuk_electricity";
+
+const options: MongoClientOptions = {
+  maxPoolSize: 10,
+  minPoolSize: 0,
+  // فشل سريع بدل الانتظار 30 ثانية (تفادي تجاوز مهلة الدالة على Netlify)
+  serverSelectionTimeoutMS: 8000,
+  connectTimeoutMS: 8000,
+  socketTimeoutMS: 30000,
+  maxIdleTimeMS: 60000,
+  retryWrites: true,
+  retryReads: true,
+};
 
 declare global {
   var _mongoClientPromise: Promise<MongoClient> | undefined;
 }
 
-const clientPromise: Promise<MongoClient> =
-  global._mongoClientPromise ?? (global._mongoClientPromise = new MongoClient(uri).connect());
+/**
+ * يعيد وعد الاتصال المخزّن (يبقى عبر إعادة التحميل الساخن وعبر الطلبات الدافئة).
+ *
+ * مهم: عند فشل الاتصال نُفرّغ المخزن فوراً حتى لا يبقى "وعد مرفوض" مخزّناً
+ * يُفشل كل الطلبات اللاحقة على نفس نسخة الدالة — وهو سبب أن الموقع كان
+ * "يسقط ثم يعود". هكذا يُعاد الاتصال تلقائياً في الطلب التالي.
+ */
+function clientPromise(): Promise<MongoClient> {
+  if (!global._mongoClientPromise) {
+    global._mongoClientPromise = new MongoClient(uri, options)
+      .connect()
+      .catch((err) => {
+        global._mongoClientPromise = undefined;
+        throw err;
+      });
+  }
+  return global._mongoClientPromise;
+}
 
 export async function getDb(): Promise<Db> {
-  const client = await clientPromise;
+  const client = await clientPromise();
   return client.db(dbName);
 }
 
