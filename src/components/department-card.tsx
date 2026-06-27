@@ -36,11 +36,11 @@ export function DepartmentCard({ department }: { department: Department }) {
   return (
     <Link
       href={`/departments/${department.id}`}
-      className="group flex flex-col rounded-2xl border border-[var(--border)] bg-white p-6 shadow-sm transition hover:-translate-y-0.5 hover:border-brand-200 hover:shadow-md"
+      className="group flex flex-col rounded-lg border border-slate-200 bg-white p-6 transition hover:border-brand-300 hover:shadow-sm"
     >
       <span
         className={cn(
-          "mb-4 flex size-12 items-center justify-center rounded-xl transition group-hover:scale-105",
+          "mb-4 flex size-12 items-center justify-center rounded-lg",
           iconWrap,
         )}
       >

@@ -49,8 +49,9 @@ export async function SiteFooter() {
         <div className="grid gap-10 lg:grid-cols-12">
           <div className="lg:col-span-4">
             <div className="flex items-center gap-3">
-              <span className="flex size-11 items-center justify-center rounded-xl bg-gradient-to-br from-brand-600 to-brand-800 text-white">
-                <Zap className="size-6 fill-accent-400 text-accent-400" />
+              <span className="relative flex size-12 items-center justify-center rounded-full bg-white/5 ring-1 ring-white/15">
+                <span className="absolute inset-[3px] rounded-full ring-1 ring-accent-400/40" aria-hidden />
+                <Zap className="size-5 fill-accent-400 text-accent-400" />
               </span>
               <span className="leading-tight">
                 <span className="block font-bold text-white">{dict.org.name}</span>

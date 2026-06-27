@@ -26,7 +26,7 @@ export async function ArticleCard({
   return (
     <article
       className={cn(
-        "group flex flex-col overflow-hidden rounded-2xl border border-[var(--border)] bg-white shadow-sm transition hover:-translate-y-0.5 hover:shadow-md",
+        "group flex flex-col overflow-hidden rounded-lg border border-slate-200 bg-white transition hover:border-brand-300 hover:shadow-sm",
         className,
       )}
     >

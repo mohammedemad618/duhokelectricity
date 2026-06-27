@@ -33,27 +33,24 @@ export function SectionHeading({
   className?: string;
 }) {
   return (
-    <div
-      className={cn(
-        "mb-6 flex flex-wrap items-end justify-between gap-3",
-        className,
-      )}
-    >
-      <div className="border-r-4 border-accent-500 pr-3">
-        <h2 className="text-xl font-bold text-brand-900 sm:text-2xl">{title}</h2>
-        {subtitle && (
-          <p className="mt-1 text-sm text-slate-500">{subtitle}</p>
+    <div className={cn("mb-6 border-b border-slate-200 pb-3", className)}>
+      <div className="flex flex-wrap items-end justify-between gap-3">
+        <div className="border-r-[3px] border-accent-500 pr-3">
+          <h2 className="text-xl font-bold text-brand-900 sm:text-2xl">{title}</h2>
+          {subtitle && (
+            <p className="mt-1 text-sm text-slate-500">{subtitle}</p>
+          )}
+        </div>
+        {action && (
+          <Link
+            href={action.href}
+            className="group inline-flex items-center gap-1 text-sm font-semibold text-brand-600 hover:text-brand-800"
+          >
+            {action.label}
+            <ChevronLeft className="size-4 transition-transform group-hover:-translate-x-0.5" />
+          </Link>
         )}
       </div>
-      {action && (
-        <Link
-          href={action.href}
-          className="group inline-flex items-center gap-1 text-sm font-semibold text-brand-600 hover:text-brand-800"
-        >
-          {action.label}
-          <ChevronLeft className="size-4 transition-transform group-hover:-translate-x-0.5" />
-        </Link>
-      )}
     </div>
   );
 }
@@ -123,7 +120,7 @@ export function PageHeader({
   breadcrumbs?: { label: string; href?: string }[];
 }) {
   return (
-    <div className="border-b border-[var(--border)] bg-gradient-to-l from-brand-900 to-brand-700 text-white">
+    <div className="border-b-2 border-accent-500/70 bg-gradient-to-l from-brand-950 to-brand-800 text-white">
       <Container className="py-8 sm:py-10">
         {breadcrumbs && (
           <div className="mb-3 [&_*]:!text-brand-100/80 [&_a:hover]:!text-white">

@@ -6,10 +6,10 @@ export function BranchCard({ branch }: { branch: Branch }) {
   return (
     <Link
       href={`/branches/${branch.id}`}
-      className="group flex flex-col rounded-2xl border border-[var(--border)] bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-brand-200 hover:shadow-md"
+      className="group flex flex-col rounded-lg border border-slate-200 bg-white p-5 transition hover:border-brand-300 hover:shadow-sm"
     >
       <div className="mb-3 flex items-center justify-between">
-        <span className="flex size-11 items-center justify-center rounded-xl bg-brand-50 text-brand-600">
+        <span className="flex size-11 items-center justify-center rounded-lg bg-brand-50 text-brand-600">
           <MapPin className="size-5" />
         </span>
         <ChevronLeft className="size-5 text-slate-300 transition group-hover:-translate-x-1 group-hover:text-brand-500" />

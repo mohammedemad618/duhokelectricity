@@ -6,18 +6,18 @@
    ========================================================================== */
 
 @theme {
-  /* اللون الأساسي (أزرق رسمي) */
-  --color-brand-50: #eef6fc;
-  --color-brand-100: #d8eaf6;
-  --color-brand-200: #b3d4ec;
-  --color-brand-300: #82b6dd;
-  --color-brand-400: #4f93ca;
-  --color-brand-500: #2b75b3;
-  --color-brand-600: #1d5d97;
-  --color-brand-700: #184b7a;
-  --color-brand-800: #163f64;
-  --color-brand-900: #143553;
-  --color-brand-950: #0d2238;
+  /* اللون الأساسي — كحلي مؤسّسي رسمي */
+  --color-brand-50: #eef4fa;
+  --color-brand-100: #d6e6f3;
+  --color-brand-200: #aecbe5;
+  --color-brand-300: #7ea9d2;
+  --color-brand-400: #4d83ba;
+  --color-brand-500: #2a679f;
+  --color-brand-600: #1d5285;
+  --color-brand-700: #173f67;
+  --color-brand-800: #11314f;
+  --color-brand-900: #0c2540;
+  --color-brand-950: #07182d;
 
   /* اللون المكمّل (كهرماني — طاقة) */
   --color-accent-50: #fff8eb;

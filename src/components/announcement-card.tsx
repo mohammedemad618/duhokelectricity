@@ -18,8 +18,8 @@ export async function AnnouncementCard({
   return (
     <article
       className={cn(
-        "relative overflow-hidden rounded-2xl border bg-white p-5 shadow-sm transition hover:shadow-md",
-        isUrgent ? "border-red-200" : "border-[var(--border)]",
+        "relative overflow-hidden rounded-lg border bg-white p-5 transition hover:shadow-sm",
+        isUrgent ? "border-rose-200" : "border-slate-200",
       )}
     >
       {/* شريط جانبي ملوّن */}

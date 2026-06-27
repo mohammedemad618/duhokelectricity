@@ -34,6 +34,8 @@ export async function SiteHeader() {
 
   return (
     <header>
+      {/* شريط ذهبي رفيع — إطار رسمي */}
+      <div className="h-1 bg-accent-500" aria-hidden />
       {/* الشريط العلوي */}
       <div className="bg-brand-900 text-brand-50">
         <Container className="flex h-9 items-center justify-between text-xs">
@@ -75,8 +77,9 @@ export async function SiteHeader() {
       <div className="sticky top-0 z-30 border-b border-[var(--border)] bg-white/95 shadow-sm backdrop-blur">
         <Container className="flex h-16 items-center justify-between gap-4">
           <Link href="/" className="flex items-center gap-3">
-            <span className="flex size-11 items-center justify-center rounded-xl bg-gradient-to-br from-brand-600 to-brand-800 text-white shadow-sm">
-              <Zap className="size-6 fill-accent-400 text-accent-400" />
+            <span className="relative flex size-12 items-center justify-center rounded-full bg-brand-900 ring-1 ring-brand-200">
+              <span className="absolute inset-[3px] rounded-full ring-1 ring-accent-400/45" aria-hidden />
+              <Zap className="size-5 fill-accent-400 text-accent-400" />
             </span>
             <span className="leading-tight">
               <span className="block text-sm font-bold text-brand-900 sm:text-base">
